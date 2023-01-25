@@ -1,6 +1,4 @@
-import React from "react";
-
-const button = (props) => {
+const button = (props:any) => {
   const classes = ["btn"];
 
   if (typeof props !== "undefined" && typeof props.type !== "undefined")

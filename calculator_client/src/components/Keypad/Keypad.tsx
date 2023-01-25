@@ -1,9 +1,7 @@
-import React from "react";
-
 import KeypadRow from "./KeypadRow";
 import Button from "./Button";
 
-const keypad = (props) => (
+const keypad = (props:any) => (
   <section className="keypad">
     <KeypadRow>
       <Button type="large" onButtonPress={props.onButtonPress}>

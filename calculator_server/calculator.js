@@ -1,59 +1,51 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.calculator = void 0;
 function calculator(tab) {
     try {
         if (tab.length == 1) {
-            return { 
-                code: isNaN(tab[0]) ? 500 : tab[0]== Infinity || tab[0]== -Infinity ? 500 : 200,
-                result: isNaN(tab[0]) ? "Expression not valid" : tab[0]== Infinity || tab[0]== -Infinity ? "Expression not valid" : tab[0]
-            }
-
-        } else {
-            let operators = {
-                first: "0",
-                second: "0",
-                "*": function () {
-                    return parseFloat(this.first) * parseFloat(this.second);
-                },
-                "+": function () {
-                    return parseFloat(this.first) + parseFloat(this.second);
-                },
-                "-": function () {
-                    return parseFloat(this.first) - parseFloat(this.second);
-                },
-                "/": function () {
-                    return parseFloat(this.first) / parseFloat(this.second);
-                }
+            return {
+                code: isNaN(tab[0]) ? 500 : tab[0] == Infinity || tab[0] == -Infinity ? 500 : 200,
+                result: isNaN(tab[0]) ? "Expression not valid" : tab[0] == Infinity || tab[0] == -Infinity ? "Expression not valid" : tab[0]
             };
-
-            let decoded_tab = [] 
-            for (let elt of tab) {
+        }
+        else {
+            var operators = {
+                "*": function (first, second) { return first * second; },
+                "+": function (first, second) { return first + second; },
+                "-": function (first, second) { return first - second; },
+                "/": function (first, second) { return first / second; }
+            };
+            var decoded_tab = [];
+            for (var _i = 0, tab_1 = tab; _i < tab_1.length; _i++) {
+                var elt = tab_1[_i];
                 if (isNaN(elt)) {
                     if (elt === "*" || elt === "/") {
-                        decoded_tab.push("F")
-                    } else {
-                        decoded_tab.push("L")
+                        decoded_tab.push("F");
                     }
-                } else {
-                    decoded_tab.push(elt)
+                    else {
+                        decoded_tab.push("L");
+                    }
+                }
+                else {
+                    decoded_tab.push(elt);
                 }
             }
-
-            let first = decoded_tab.indexOf("F")
+            var first = decoded_tab.indexOf("F");
             if (first == -1) {
-                first = decoded_tab.indexOf("L")
+                first = decoded_tab.indexOf("L");
             }
-            let generated_tab = []
-
-            generated_tab = tab.slice(0, first - 1)
-            operators.first = decoded_tab[first - 1]
-            operators.second = decoded_tab[first + 1]
-            generated_tab.push(operators[tab[first]]())
-            generated_tab = generated_tab.concat(tab.slice(first + 2, tab.length))
-
-            return calculator(generated_tab)
+            var generated_tab = [];
+            generated_tab = tab.slice(0, first - 1);
+            var first_number = parseFloat(decoded_tab[first - 1]);
+            var second_number = parseFloat(decoded_tab[first + 1]);
+            generated_tab.push(operators[tab[first]](first_number, second_number));
+            generated_tab = generated_tab.concat(tab.slice(first + 2, tab.length));
+            return calculator(generated_tab);
         }
-    } catch (error) {
-        throw new Error("Expression not valid")
+    }
+    catch (error) {
+        throw new Error("Expression not valid");
     }
 }
-
-module.exports = calculator;
+exports.calculator = calculator;

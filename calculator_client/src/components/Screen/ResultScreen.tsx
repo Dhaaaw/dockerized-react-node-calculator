@@ -1,6 +1,4 @@
-import React from "react";
-
-const resultScreen = (props) => (
+const resultScreen = (props: any) => (
   <div data-testid="result-screen" className="result-screen">
     {props.children}
   </div>
