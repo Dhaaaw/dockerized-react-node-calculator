@@ -5,7 +5,7 @@ A simple calculator built with React and Nodejs
 You will need to install:
 
 - [Docker](https://docs.docker.com/get-docker/)
-- [Node.JS / NPM](https://nodejs.org/en/download/
+- [Node.JS / NPM](https://nodejs.org/en/download/)
 
 ### Controls
 
