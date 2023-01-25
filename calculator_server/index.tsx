@@ -18,11 +18,9 @@ app.use(
 app.use(express.static(path.join(__dirname, "../calculator_client/build")));
 
 app.post('/calculator', (req, res) => {
-    let result = calculator(req.body.equation.split(""));
-  if (result === "Error") res.status(500).send({ result });
-  else {
-    res.status(200).send({ result });
-    }
+    let result = calculator(req.body.equation.split(" "));
+  if (result === "Expression not valid") res.status(500).send(result);
+  else  res.status(200).send(String(result));
 });
 
 app.get("/*", (req, res) => {

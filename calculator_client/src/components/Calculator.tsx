@@ -29,7 +29,7 @@ const Calculator: React.FC = () => {
       equation += pressedButton;
       setBlock(false);
     } else if (["+", "-", "*", "/"].indexOf(pressedButton) !== -1) {
-      if (!block){ equation += pressedButton;
+      if (!block){ equation += " "+pressedButton+" ";
       setBlock(true);}
     } else if (pressedButton === "=") {
       axios
@@ -38,9 +38,9 @@ const Calculator: React.FC = () => {
           equation,
         })
         .then((response) => {
-          const res = Number.isInteger(response.data.result.result)
-            ? response.data.result.result
-            : response.data.result.result.toFixed(3);
+          const res = Number.isInteger(response.data)
+            ? response.data
+            : response.data.toFixed(3);
             setState({ ...state, result:res });
         })
         .catch((error) => {
